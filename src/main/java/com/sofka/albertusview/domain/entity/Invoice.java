@@ -1,7 +1,7 @@
 package com.sofka.albertusview.domain.entity;
 
 import co.com.sofka.domain.generic.Entity;
-import com.sofka.albertus.domain.values.*;
+import com.sofka.albertusview.domain.values.*;
 
 public class Invoice extends Entity<InvoiceId> {
     private InvoiceDate invoiceDate;

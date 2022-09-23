@@ -1,13 +1,14 @@
 package com.sofka.albertusview.domain.entity;
 
 import co.com.sofka.domain.generic.Entity;
-import com.sofka.albertus.domain.values.*;
+import com.sofka.albertusview.domain.values.*;
+
 
 import java.util.Set;
 
 public class User extends Entity<UserId> {
 
-    private  FullName fullName;
+    private FullName fullName;
     private Email email;
     private Password password;
     private Set<ApplicationId> applicationIds;

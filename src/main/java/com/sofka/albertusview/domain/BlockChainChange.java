@@ -1,11 +1,6 @@
 package com.sofka.albertusview.domain;
 
 import co.com.sofka.domain.generic.EventChange;
-import com.sofka.albertus.domain.events.BlockChainCreated;
-import com.sofka.albertus.domain.events.BlockCreated;
-import com.sofka.albertus.domain.events.GenesisBlockCreated;
-import com.sofka.albertus.domain.values.Block;
-import com.sofka.albertus.domain.values.Name;
 import com.sofka.albertusview.domain.events.BlockChainCreated;
 import com.sofka.albertusview.domain.events.BlockCreated;
 import com.sofka.albertusview.domain.events.GenesisBlockCreated;

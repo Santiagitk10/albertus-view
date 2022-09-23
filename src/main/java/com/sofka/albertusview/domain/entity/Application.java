@@ -1,10 +1,11 @@
 package com.sofka.albertusview.domain.entity;
 
 import co.com.sofka.domain.generic.Entity;
-import com.sofka.albertus.domain.values.ApplicationId;
-import com.sofka.albertus.domain.values.Description;
-import com.sofka.albertus.domain.values.IsActive;
-import com.sofka.albertus.domain.values.Name;
+import com.sofka.albertusview.domain.values.ApplicationId;
+import com.sofka.albertusview.domain.values.Description;
+import com.sofka.albertusview.domain.values.IsActive;
+import com.sofka.albertusview.domain.values.Name;
+
 
 public class Application extends Entity<ApplicationId> {
 

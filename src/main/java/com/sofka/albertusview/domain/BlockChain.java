@@ -2,15 +2,16 @@ package com.sofka.albertusview.domain;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
-import com.sofka.albertus.domain.entity.Application;
-import com.sofka.albertus.domain.entity.Invoice;
-import com.sofka.albertus.domain.entity.User;
-import com.sofka.albertus.domain.events.BlockChainCreated;
-import com.sofka.albertus.domain.events.BlockCreated;
-import com.sofka.albertus.domain.events.GenesisBlockCreated;
-import com.sofka.albertus.domain.values.Block;
-import com.sofka.albertus.domain.values.BlockChainId;
-import com.sofka.albertus.domain.values.Name;
+import com.sofka.albertusview.domain.entity.Application;
+import com.sofka.albertusview.domain.entity.Invoice;
+import com.sofka.albertusview.domain.entity.User;
+import com.sofka.albertusview.domain.events.BlockChainCreated;
+import com.sofka.albertusview.domain.events.BlockCreated;
+import com.sofka.albertusview.domain.events.GenesisBlockCreated;
+import com.sofka.albertusview.domain.values.Block;
+import com.sofka.albertusview.domain.values.BlockChainId;
+import com.sofka.albertusview.domain.values.Name;
+
 
 import java.time.Instant;
 import java.util.List;
