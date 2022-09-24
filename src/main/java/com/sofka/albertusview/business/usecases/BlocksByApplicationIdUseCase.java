@@ -20,4 +20,6 @@ public class BlocksByApplicationIdUseCase implements Function<String, Flux<Block
     public Flux<BlockViewModel> apply(String idApplication) {
         return repository.getAllBlocksByApplicationId(idApplication);
     }
+
+    //COMENTARIO PRUEBA
 }
