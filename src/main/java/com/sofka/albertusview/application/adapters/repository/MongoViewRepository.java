@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -65,5 +66,19 @@ public class MongoViewRepository implements DomainViewRepository {
         return template.save(block);
     }
 
+    @Override
+    public Mono<BlockViewModel> getBlockByHash(String hash) {
+        var query =  Query.query(
+                Criteria.where("hash").is(hash)
+        );
+        return template.findOne(query,BlockViewModel.class);
+    }
 
+
+    public Flux<BlockViewModel> getAllBlocksByApplicationId(String idApplication) {
+        var query =  Query.query(
+                Criteria.where("applicationId").is(idApplication)
+        );
+        return template.find(query,BlockViewModel.class);
+    }
 }
