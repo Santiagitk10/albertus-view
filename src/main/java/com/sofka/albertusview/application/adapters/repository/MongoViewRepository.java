@@ -89,8 +89,13 @@ public class MongoViewRepository implements DomainViewRepository {
     }
 
     @Override
-    public Mono<ApplicationViewModel> updateDeleteApplication(ApplicationViewModel application) {
-        return template.save(application);
+    public Mono<ApplicationViewModel> updateDeleteApplication(String idApplication) {
+        var data = new Update();
+        data.set("isActive", false);
+        var query =  Query.query(
+                Criteria.where("applicationId").is(idApplication)
+        );
+        return template.findAndModify(query,data,ApplicationViewModel.class);
     }
 
 

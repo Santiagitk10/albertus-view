@@ -23,7 +23,7 @@ public interface DomainViewRepository {
 
     Mono<ApplicationViewModel> saveNewApplication(ApplicationViewModel application);
 
-    Mono<ApplicationViewModel> updateDeleteApplication(ApplicationViewModel application);
+    Mono<ApplicationViewModel> updateDeleteApplication( String idApplication);
 
 
 }
