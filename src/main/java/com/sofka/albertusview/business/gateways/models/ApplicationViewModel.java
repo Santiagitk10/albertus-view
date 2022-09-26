@@ -1,28 +1,27 @@
 package com.sofka.albertusview.business.gateways.models;
 
-import com.sofka.albertusview.domain.values.UserId;
-
 public class ApplicationViewModel {
 
-  private String nameApolication;
+  private String applicationID;
+  private String nameApplication;
   private String description;
   private Boolean isActive;
-  private UserId userId;
+  private String userId;
 
-  public ApplicationViewModel(String nameApolication, String description, Boolean isActive,
-      UserId userId) {
-    this.nameApolication = nameApolication;
+  public ApplicationViewModel(String applicationID, String nameApplication, String description, Boolean isActive, String userId) {
+    this.applicationID = applicationID;
+    this.nameApplication = nameApplication;
     this.description = description;
     this.isActive = isActive;
     this.userId = userId;
   }
 
-  public String getNameApolication() {
-    return nameApolication;
+  public String getNameApplication() {
+    return nameApplication;
   }
 
-  public void setNameApolication(String nameApolication) {
-    this.nameApolication = nameApolication;
+  public void setNameApplication(String nameApplication) {
+    this.nameApplication = nameApplication;
   }
 
   public String getDescription() {
@@ -33,6 +32,10 @@ public class ApplicationViewModel {
     this.description = description;
   }
 
+  public String getApplicationID() {
+    return applicationID;
+  }
+
   public Boolean getActive() {
     return isActive;
   }
@@ -41,11 +44,11 @@ public class ApplicationViewModel {
     isActive = active;
   }
 
-  public UserId getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(UserId userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 }
