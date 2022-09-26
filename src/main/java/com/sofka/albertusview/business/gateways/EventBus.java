@@ -5,7 +5,7 @@ import com.sofka.albertusview.business.gateways.models.BlockChainModel;
 
 public interface EventBus {
 
-    void publishApplication(ApplicationViewModel applicationViewModel);
+    void publishApplication(Object model);
     void publishBlockChain(BlockChainModel blockChainViewModel);
 
 

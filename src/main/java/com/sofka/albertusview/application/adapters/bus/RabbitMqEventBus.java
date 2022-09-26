@@ -23,8 +23,12 @@ public class RabbitMqEventBus implements EventBus {
 
 
   @Override
-  public void publishApplication(ApplicationViewModel applicationViewModel) {
-
+  public void publishApplication(Object model) {
+    log.info("BLOCKCHAIN ADDED");
+    rabbitTemplate.convertAndSend(
+            RabbitMqConfig.EXCHANGE, RabbitMqConfig.PROXY_ROUTING_KEY_APPLICATION,
+            gson.toJson(model).getBytes()
+    );
   }
 
   @Override
