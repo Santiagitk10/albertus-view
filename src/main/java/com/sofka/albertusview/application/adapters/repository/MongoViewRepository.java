@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+
 @Slf4j
 @Repository
 public class MongoViewRepository implements DomainViewRepository {
@@ -103,6 +105,8 @@ public class MongoViewRepository implements DomainViewRepository {
         var data = new Update();
         data.set("description", description);
         data.set("nameApplication", name);
+        data.set("modificationDate", Instant.now());
+
         var query =  Query.query(
                 Criteria.where("applicationID").is(idApplication)
         );
