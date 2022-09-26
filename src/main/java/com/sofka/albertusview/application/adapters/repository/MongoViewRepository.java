@@ -2,6 +2,7 @@ package com.sofka.albertusview.application.adapters.repository;
 
 
 import com.google.gson.Gson;
+import com.mongodb.client.result.UpdateResult;
 import com.sofka.albertusview.business.gateways.DomainViewRepository;
 import com.sofka.albertusview.business.gateways.models.ApplicationViewModel;
 import com.sofka.albertusview.business.gateways.models.BlockChainModel;
@@ -89,13 +90,13 @@ public class MongoViewRepository implements DomainViewRepository {
     }
 
     @Override
-    public Mono<ApplicationViewModel> updateDeleteApplication(String idApplication) {
+    public Mono<UpdateResult> updateDeleteApplication(String idApplication) {
         var data = new Update();
         data.set("isActive", false);
         var query =  Query.query(
-                Criteria.where("applicationId").is(idApplication)
+                Criteria.where("applicationID").is(idApplication)
         );
-        return template.findAndModify(query,data,ApplicationViewModel.class);
+        return template.updateFirst(query, data, ApplicationViewModel.class);
     }
 
 
