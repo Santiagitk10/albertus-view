@@ -71,20 +71,11 @@ public class ViewUpdater extends DomainUpdater {
         });
 
         listen((ApplicationUpdated applicationUpdated) -> {
-<<<<<<< HEAD
-            repository.updateApplication(
-                    applicationUpdated.getApplicationID(),
-                    applicationUpdated.getNameApplication(),
-                    applicationUpdated.getDescription()
-            ).subscribe();
-        });
-=======
             repository.updateApplication(applicationUpdated.getApplicationID(), applicationUpdated.getDescription(), applicationUpdated.getNameApplication()).subscribe();
         });
 
 
 
->>>>>>> 8efd71b2391a035d91fbc5907197bc1c6ee7c03e
 
 
     }

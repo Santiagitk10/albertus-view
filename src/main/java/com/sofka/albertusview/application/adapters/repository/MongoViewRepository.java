@@ -109,21 +109,6 @@ public class MongoViewRepository implements DomainViewRepository {
         return template.updateFirst(query, data, ApplicationViewModel.class);
     }
 
-
-    @Override
-    public Mono<UpdateResult> updateApplication(String idApplication, String name, String description) {
-        var data = new Update();
-        data.set("nameApplication", name);
-        data.set("description", description);
-        var query =  Query.query(
-                Criteria.where("applicationID").is(idApplication)
-        );
-        return template.updateFirst(query, data, ApplicationViewModel.class);
-    }
-
-
-
-
     public Flux<ApplicationViewModel> getAllApplicationsByUserId(String userId){
         var query =  Query.query(
                 Criteria.where("userId").is(userId)
