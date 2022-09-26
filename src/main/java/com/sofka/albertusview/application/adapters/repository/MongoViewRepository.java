@@ -99,5 +99,12 @@ public class MongoViewRepository implements DomainViewRepository {
         return template.updateFirst(query, data, ApplicationViewModel.class);
     }
 
+    public Flux<ApplicationViewModel> getAllApplicationsByUserId(String userId){
+        var query =  Query.query(
+                Criteria.where("userId").is(userId)
+        );
+        return template.find(query,ApplicationViewModel.class);
+    }
+
 
 }
