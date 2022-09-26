@@ -106,6 +106,7 @@ public class MongoViewRepository implements DomainViewRepository {
         data.set("description", description);
         data.set("nameApplication", name);
         data.set("modificationDate", Instant.now());
+
         var query =  Query.query(
                 Criteria.where("applicationID").is(idApplication)
         );
