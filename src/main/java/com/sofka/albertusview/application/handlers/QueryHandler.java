@@ -23,13 +23,13 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class QueryHandler {
 
   @Bean
-  public RouterFunction<ServerResponse> getBlockByHash(BringBlockByHashUseCase bringBlockByHashUseCase){
+  public RouterFunction<ServerResponse> getBlockByHash(
+          BringBlockByHashUseCase bringBlockByHashUseCase) {
     log.info("Bringing  block");
     return route(GET("/block/{hash}"),
-        request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromPublisher(bringBlockByHashUseCase.apply(request.pathVariable("hash")), BlockResponse.class))
-    );
-
+            request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromPublisher(
+                            bringBlockByHashUseCase.apply(request.pathVariable("hash")), Object.class)));
   }
 
   /*@Bean

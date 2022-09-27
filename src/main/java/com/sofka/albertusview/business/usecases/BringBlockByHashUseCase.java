@@ -18,13 +18,9 @@ public class BringBlockByHashUseCase implements Function<String, Mono<Object>> {
     @Override
     public Mono<Object> apply(String hash) {
 
-        var block = this.repository.getBlockByHash(hash);
-        return block.flatMapMany(bloc ->   {
-            System.out.println("");
-            return Flux.just(bloc.getData());
-        });
-
-
+        return this.repository.getBlockByHash(hash).flatMap(blockViewModel ->
+                blockViewModel.getData().isEmpty() ? Mono.just("No data found")
+                        : Mono.just(blockViewModel.getData()));
 
     }
 
