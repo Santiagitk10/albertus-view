@@ -4,6 +4,7 @@ package com.sofka.albertusview.application.adapters.repository;
 import com.google.gson.Gson;
 import com.mongodb.client.result.UpdateResult;
 import com.sofka.albertusview.business.gateways.DomainViewRepository;
+import com.sofka.albertusview.business.gateways.EventBus;
 import com.sofka.albertusview.business.gateways.models.ApplicationViewModel;
 import com.sofka.albertusview.business.gateways.models.BlockChainModel;
 import com.sofka.albertusview.business.gateways.models.BlockViewModel;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -20,14 +22,18 @@ import java.time.Instant;
 
 @Slf4j
 @Repository
+@Component
 public class MongoViewRepository implements DomainViewRepository {
 
     private final ReactiveMongoTemplate template;
 
     private final Gson gson = new Gson();
 
-    public MongoViewRepository(ReactiveMongoTemplate template) {
+    private final EventBus bus;
+
+    public MongoViewRepository(ReactiveMongoTemplate template, EventBus bus) {
         this.template = template;
+        this.bus = bus;
     }
 
     @Override
@@ -88,6 +94,7 @@ public class MongoViewRepository implements DomainViewRepository {
 
     @Override
     public Mono<ApplicationViewModel> saveNewApplication(ApplicationViewModel application) {
+        bus.publishApplication(application);
         return template.save(application);
     }
 

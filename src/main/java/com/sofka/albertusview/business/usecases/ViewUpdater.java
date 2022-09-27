@@ -35,7 +35,7 @@ public class ViewUpdater extends DomainUpdater {
                     new ArrayList<>()
 
             );
-            //bus.publishBlockChain(blockChainModel);
+            //bus.publishApplication(blockChainModel);
             repository.saveNewBlockChain(blockChainModel).subscribe();
         });
 
@@ -49,7 +49,7 @@ public class ViewUpdater extends DomainUpdater {
                     blockCreated.getHasOverCharge(),
                     blockCreated.getPreviusHash()
             );
-            //bus.publishBlockChain();
+            //bus.publishApplication(blockViewModel);
             repository.addBlock(blockViewModel).subscribe();
         });
 

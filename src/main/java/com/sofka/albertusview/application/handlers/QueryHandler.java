@@ -3,6 +3,7 @@ package com.sofka.albertusview.application.handlers;
 
 import com.sofka.albertusview.business.gateways.models.ApplicationViewModel;
 import com.sofka.albertusview.business.gateways.models.BlockViewModel;
+import com.sofka.albertusview.business.generics.BlockResponse;
 import com.sofka.albertusview.business.usecases.BlocksByApplicationIdUseCase;
 import com.sofka.albertusview.business.usecases.BringApplicationsUseCase;
 import com.sofka.albertusview.business.usecases.BringBlockByHashUseCase;
@@ -26,10 +27,20 @@ public class QueryHandler {
     log.info("Bringing  block");
     return route(GET("/block/{hash}"),
         request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromPublisher(bringBlockByHashUseCase.apply(request.pathVariable("hash")), BlockViewModel.class))
+            .body(BodyInserters.fromPublisher(bringBlockByHashUseCase.apply(request.pathVariable("hash")), BlockResponse.class))
     );
 
   }
+
+  /*@Bean
+  public RouterFunction<ServerResponse> getBlockByHash(BringBlockByHashUseCase bringBlockByHashUseCase){
+    log.info("Bringing  block");
+    return route(GET("/block/{hash}"),
+            request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromPublisher(bringBlockByHashUseCase.apply(request.pathVariable("hash")), BlockResponse.class))
+    );
+
+  }*/
 
   @Bean
   public RouterFunction<ServerResponse> getAllBlocksByApplicationId(BlocksByApplicationIdUseCase blocksByApplicationIdUseCase){

@@ -1,13 +1,13 @@
 package com.sofka.albertusview.business.usecases;
 
 import com.sofka.albertusview.application.adapters.repository.MongoViewRepository;
-import com.sofka.albertusview.business.gateways.models.BlockViewModel;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 @Service
-public class BringBlockByHashUseCase implements Function<String, Mono<BlockViewModel>> {
+public class BringBlockByHashUseCase implements Function<String, Mono<Object>> {
 
     public  final MongoViewRepository repository;
 
@@ -16,8 +16,16 @@ public class BringBlockByHashUseCase implements Function<String, Mono<BlockViewM
     }
 
     @Override
-    public Mono<BlockViewModel> apply(String hash) {
-        return this.repository.getBlockByHash(hash);
+    public Mono<Object> apply(String hash) {
+
+        var block = this.repository.getBlockByHash(hash);
+        return block.flatMapMany(bloc ->   {
+            System.out.println("");
+            return Flux.just(bloc.getData());
+        });
+
+
+
     }
 
 

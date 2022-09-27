@@ -24,19 +24,11 @@ public class RabbitMqEventBus implements EventBus {
 
   @Override
   public void publishApplication(Object model) {
-    log.info("BLOCKCHAIN ADDED");
+    log.info(model.toString());
     rabbitTemplate.convertAndSend(
             RabbitMqConfig.EXCHANGE, RabbitMqConfig.PROXY_ROUTING_KEY_APPLICATION,
             gson.toJson(model).getBytes()
     );
   }
 
-  @Override
-  public void publishBlockChain(BlockChainModel blockChainViewModel) {
-    log.info("BLOCKCHAIN ADDED");
-    rabbitTemplate.convertAndSend(
-        RabbitMqConfig.EXCHANGE, RabbitMqConfig.PROXY_ROUTING_KEY_AGG_BLOCKCHAIN,
-        gson.toJson(blockChainViewModel).getBytes()
-    );
-  }
 }
