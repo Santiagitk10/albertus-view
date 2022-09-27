@@ -19,6 +19,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Repository
@@ -112,6 +114,10 @@ public class MongoViewRepository implements DomainViewRepository {
         var query = Query.query(
                 Criteria.where("applicationID").is(idApplication)
         );
+        Map<String, Object> ApplicationDeleted = new HashMap<String, Object>();
+        ApplicationDeleted.put("type", "delete");
+        ApplicationDeleted.put("data", idApplication);
+        bus.publishApplication(ApplicationDeleted);
         return template.updateFirst(query, data, ApplicationViewModel.class);
     }
 
