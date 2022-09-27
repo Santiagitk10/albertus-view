@@ -78,4 +78,17 @@ public class ApplicationViewModel {
   public void setModificationDate(Instant modificationDate) {
     this.modificationDate = modificationDate;
   }
+
+  @Override
+  public String toString() {
+    return "ApplicationViewModel{" +
+            "applicationID='" + applicationID + '\'' +
+            ", nameApplication='" + nameApplication + '\'' +
+            ", description='" + description + '\'' +
+            ", isActive=" + isActive +
+            ", userId='" + userId + '\'' +
+            ", creationDate=" + creationDate +
+            ", modificationDate=" + modificationDate +
+            '}';
+  }
 }

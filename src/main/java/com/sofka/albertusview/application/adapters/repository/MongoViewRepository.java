@@ -22,7 +22,6 @@ import java.time.Instant;
 
 @Slf4j
 @Repository
-@Component
 public class MongoViewRepository implements DomainViewRepository {
 
     private final ReactiveMongoTemplate template;
@@ -52,14 +51,14 @@ public class MongoViewRepository implements DomainViewRepository {
 
     @Override
     public Mono<BlockChainModel> addBlockToBlockChain(BlockViewModel block) {
-    var update = new Update();
-    update.addToSet("blocks").value(block);
-    var query =  Query.query(
-            Criteria.where("blockChainId").is("1")
-    );
-    return template.updateFirst(query,update,"blockChainModel").flatMap(block2 ->{
-        return Mono.empty();
-    });
+        var update = new Update();
+        update.addToSet("blocks").value(block);
+        var query = Query.query(
+                Criteria.where("blockChainId").is("1")
+        );
+        return template.updateFirst(query, update, "blockChainModel").flatMap(block2 -> {
+            return Mono.empty();
+        });
 
 
        /* var algo = this.findByAggregateId("1")
@@ -78,35 +77,44 @@ public class MongoViewRepository implements DomainViewRepository {
 
     @Override
     public Mono<BlockViewModel> getBlockByHash(String hash) {
-        var query =  Query.query(
+        var query = Query.query(
                 Criteria.where("hash").is(hash)
         );
-        return template.findOne(query,BlockViewModel.class);
+        return template.findOne(query, BlockViewModel.class);
     }
 
 
     public Flux<BlockViewModel> getAllBlocksByApplicationId(String idApplication) {
-        var query =  Query.query(
+        var query = Query.query(
                 Criteria.where("applicationId").is(idApplication)
         );
-        return template.find(query,BlockViewModel.class);
+        return template.find(query, BlockViewModel.class);
     }
 
     @Override
     public Mono<ApplicationViewModel> saveNewApplication(ApplicationViewModel application) {
-        bus.publishApplication(application);
-        return template.save(application);
+
+        return template.save(application)
+                .flatMap(applicationViewModel ->
+                        {
+                            bus.publishApplication(application);
+                            System.out.println(applicationViewModel);
+                            return Mono.just(applicationViewModel);
+                        }
+                );
+
     }
 
     @Override
     public Mono<UpdateResult> updateDeleteApplication(String idApplication) {
         var data = new Update();
         data.set("isActive", false);
-        var query =  Query.query(
+        var query = Query.query(
                 Criteria.where("applicationID").is(idApplication)
         );
         return template.updateFirst(query, data, ApplicationViewModel.class);
     }
+
     @Override
     public Mono<UpdateResult> updateApplication(String idApplication, String description, String name) {
         var data = new Update();
@@ -114,17 +122,17 @@ public class MongoViewRepository implements DomainViewRepository {
         data.set("nameApplication", name);
         data.set("modificationDate", Instant.now());
 
-        var query =  Query.query(
+        var query = Query.query(
                 Criteria.where("applicationID").is(idApplication)
         );
         return template.updateFirst(query, data, ApplicationViewModel.class);
     }
 
-    public Flux<ApplicationViewModel> getAllApplicationsByUserId(String userId){
-        var query =  Query.query(
+    public Flux<ApplicationViewModel> getAllApplicationsByUserId(String userId) {
+        var query = Query.query(
                 Criteria.where("userId").is(userId)
         );
-        return template.find(query,ApplicationViewModel.class);
+        return template.find(query, ApplicationViewModel.class);
     }
 
 

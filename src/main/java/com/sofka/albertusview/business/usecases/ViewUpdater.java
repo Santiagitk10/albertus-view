@@ -63,7 +63,8 @@ public class ViewUpdater extends DomainUpdater {
                     applicationRegistered.getCreationDate(),
                     applicationRegistered.getModificationDate()
             );
-            repository.saveNewApplication(applicationViewModel).subscribe();
+            repository.saveNewApplication(applicationViewModel).subscribe(applicationViewModel1 ->
+                    System.out.println(applicationViewModel1));
         });
 
         listen((ApplicationDeleted applicationDeleted) -> {
@@ -73,10 +74,5 @@ public class ViewUpdater extends DomainUpdater {
         listen((ApplicationUpdated applicationUpdated) -> {
             repository.updateApplication(applicationUpdated.getApplicationID(), applicationUpdated.getDescription(), applicationUpdated.getNameApplication()).subscribe();
         });
-
-
-
-
-
     }
 }
