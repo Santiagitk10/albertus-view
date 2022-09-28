@@ -49,8 +49,8 @@ public class ViewUpdater extends DomainUpdater {
                     blockCreated.getHasOverCharge(),
                     blockCreated.getPreviusHash()
             );
-            //bus.publishApplication(blockViewModel);
             repository.addBlock(blockViewModel).subscribe();
+
         });
 
         listen((ApplicationRegistered applicationRegistered) -> {

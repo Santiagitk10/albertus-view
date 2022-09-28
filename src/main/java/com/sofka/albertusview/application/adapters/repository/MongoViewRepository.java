@@ -74,6 +74,10 @@ public class MongoViewRepository implements DomainViewRepository {
 
     @Override
     public Mono<BlockViewModel> addBlock(BlockViewModel block) {
+        Map<String, Object> blockCreated = new HashMap<String, Object>();
+        blockCreated.put("type", "blockCreated");
+        blockCreated.put("data", block);
+        bus.publishApplication(blockCreated);
         return template.save(block);
     }
 
